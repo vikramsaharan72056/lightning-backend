@@ -5,7 +5,7 @@ import express from 'express';
 import cors from 'cors';
 import proxyRoutes from './routes/proxyRoutes.js';
 import connectDB from './config/db.js'
-import checkAndLogBandwidth  from './utils/cronjob.js';
+import {checkAndLogBandwidth}  from './utils/cronjob.js';
 
 
 const app = express();
