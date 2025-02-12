@@ -1,7 +1,7 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
 dotenv.config();
-
+import {latestCronData,checkAndLogBandwidth } from "../utils/cronjob.js"
 const API_KEY = process.env.LIGHTNING_PROXIES_API_KEY;
 const BASE_URL = 'https://resell.lightningproxies.net/api';
 
@@ -98,7 +98,7 @@ export const createAccountWithPlan = async (req, res) => {
 export const getPlanList = async (req, res) => {
     console.log("entered ")
     try {
-        const response = await axios.get(`${BASE_URL}/plan/1-5`, {
+        const response = await axios.get(`${BASE_URL}/plan/1-20`, {
             headers: { 'x-api-key': API_KEY }
         });
         res.json({ success: true, plans: response.data });
@@ -188,12 +188,19 @@ export const modifyGigabytes = async (req, res) => {
 // Check Remaining Bandwidth
 
 export const checkBandwidth = async (req, res) => {
+    
     try {
-        const response = await axios.get(`${BASE_URL}/user-info`, {
-            headers: { 'x-api-key': API_KEY }
+        
+
+        res.json({
+            success: true,
+            latestCronData
         });
-        res.json({ success: true, bandwidthGB: (response.data.remaining_bytes / (1024 * 1024 * 1024)).toFixed(2) });
+
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching bandwidth', error: error.response?.data || error.message });
+        res.status(500).json({
+            message: 'Error fetching bandwidth',
+            error: error.message
+        });
     }
 };
