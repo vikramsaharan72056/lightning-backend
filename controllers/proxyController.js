@@ -98,7 +98,7 @@ export const createAccountWithPlan = async (req, res) => {
 export const getPlanList = async (req, res) => {
     console.log("entered ")
     try {
-        const response = await axios.get(`${BASE_URL}/plan/1-20`, {
+        const response = await axios.get(`${BASE_URL}/plan/1-5`, {
             headers: { 'x-api-key': API_KEY }
         });
         res.json({ success: true, plans: response.data });
