@@ -11,7 +11,8 @@ import {
     modifyGigabytes, 
     checkBandwidth,
     getStateList,
-    getCityList 
+    getCityList,
+    getPlanDetails 
 } from '../controllers/proxyController.js';
 
 const router = express.Router();
@@ -29,5 +30,6 @@ router.post('/get-city-list', getCityList);
 router.post('/purchase-residential-plan', purchaseResidentialPlan);
 router.post('/modify-gigabytes', modifyGigabytes);
 router.get('/check-bandwidth', checkBandwidth);
+router.get('/get-plan-details/:planId', getPlanDetails);
 
 export default router;

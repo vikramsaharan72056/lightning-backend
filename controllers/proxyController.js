@@ -204,3 +204,17 @@ export const checkBandwidth = async (req, res) => {
         });
     }
 };
+
+export const getPlanDetails = async (req, res) => {
+    const { planId } = req.params;
+
+    try {
+        const response = await axios.get(`${BASE_URL}/info/${planId}`, {
+            headers: { 'x-api-key': API_KEY },
+        });
+
+        res.json({ success: true, data: response.data });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Failed to fetch plan details', error: error.response?.data || error.message });
+    }
+};
